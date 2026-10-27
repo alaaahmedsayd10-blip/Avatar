@@ -1,16 +1,24 @@
-# Avatar — Virtual World Test
+# Avatar — عالمي الافتراضي
 
-The game archive is stored in `my-virtual-world_v10_cloudflare_online.zip`. The GitHub Actions workflow extracts it and deploys the Worker plus static game assets through Wrangler.
+جهزت مسار نشر من GitHub Pages حتى لا تحتاج إلى إعداد Cloudflare أو إضافة أسرار Cloudflare.
 
-## One-time setup required
+## نشر نسخة اللعبة
 
-In GitHub, open **Settings → Secrets and variables → Actions → New repository secret** and add:
+1. افتح تبويب **Actions** في المستودع.
+2. اختر **Publish Avatar on GitHub Pages**.
+3. اضغط **Run workflow** إذا ظهر الزر، أو انتظر تشغيله تلقائيًا بعد تحديث ملف اللعبة.
+4. بعد نجاح مرحلتي Build وDeploy، افتح **Settings → Pages**؛ سيعرض GitHub رابط اللعبة المنشورة.
 
-- `CLOUDFLARE_API_TOKEN`: a Cloudflare API token allowed to deploy Workers.
-- `CLOUDFLARE_ACCOUNT_ID`: your Cloudflare account ID.
+ملف اللعبة الأصلي محفوظ داخل `my-virtual-world_v10_cloudflare_online.zip`، ويستخرج مسار النشر ملفات الواجهة والصور من داخله.
 
-Then open **Actions → Deploy Avatar test world → Run workflow**. The workflow uses a separate Worker name (`avatar-virtual-world-test`) so it does not overwrite the existing `damp-shadow-03ce` Worker.
+## مهم بخصوص اللعب الجماعي
 
-## Important
+نشر GitHub Pages يستضيف ملفات الواجهة فقط؛ لا يشغّل WebSocket أو خادم اللعبة. المشروع الحالي ما زال يستخدم اتصال Cloudflare القديم للّعب الجماعي، لذلك لا أعتبر النشر وحده تفعيلًا للأونلاين.
 
-The live game URL will only exist after a successful deployment. The workflow has been added, but it cannot deploy until the two Cloudflare secrets are configured. The online multiplayer prototype still needs a two-account test after deployment.
+لتحويل الاتصال إلى Playroom Kit، يلزم `gameId` خاص بمشروعك من [Playroom Dev Portal](https://dev.joinplayroom.com/). بعد إنشاء المشروع، أرسل قيمة `gameId` فقط (ليست كلمة مرور أو مفتاحًا سريًا) حتى نربط حركة اللاعبين بالغرفة المشتركة. تظل Supabase مسؤولة عن الحسابات.
+
+## الملفات
+
+- `my-virtual-world_v10_cloudflare_online.zip`: نسخة المشروع المرفوعة.
+- `.github/workflows/pages.yml`: نشر ملفات اللعبة عبر GitHub Pages.
+- `.github/workflows/deploy-avatar.yml`: مسار Cloudflare القديم، لم يعد مطلوبًا لنشر ملفات الواجهة.
