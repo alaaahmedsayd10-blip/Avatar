@@ -6,6 +6,7 @@ on:
     paths:
       - 'my-virtual-world_v10_cloudflare_online.zip'
       - '.github/workflows/pages.yml'
+      - 'README.md'
 
 permissions:
   contents: read
